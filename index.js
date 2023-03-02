@@ -1,25 +1,28 @@
 function createClock(){
-  const date = new Date();
 
-  const time = [
-    date.getHours(),
-    date.getMinutes(),
-    date.getSeconds(),
-  ];
-  
-  if(time[0] < 10){time[0] = "0"+ time[0];}
-  if(time[1] < 10){time[1] = "0"+ time[1];}
-  if(time[2] < 10){time[2] = "0"+ time[2];}
-  
-  let currentTime = [time[0],time[1],time[2]].join(':');
+  const hours = new Date().getHours();
+  const minutes = new Date().getMinutes();
+  const seconds = new Date().getSeconds();
 
-  const clockElem = document.createElement('div');
-  const clock = document.createElement('span');
+  if(hours < 10){hours = "0"+ hours;}
+  if(minutes < 10){minutes = "0"+ minutes;}
+  if(seconds < 10){seconds = "0"+ seconds;}
 
-  document.body.prepend(clockElem);
-  clockElem.prepend(clock);
-  clock.innerHTML = currentTime;
-  // setTimeout(() => createClock(), 1000); 
+  const hoursElem = document.querySelector(".hours").innerHTML = hours;
+  const minutesElem = document.querySelector(".minutes").innerHTML = minutes;
+  const sevondsElem = document.querySelector(".seconds").innerHTML = seconds;
 }
 
-console.log(createClock());
+let time = 0;
+
+function countdown(){
+  time = setInterval(() => createClock(), 1000);
+}
+
+function clockStart(){
+  countdown();
+}
+
+function clockStop(){
+  clearTimeout(time);
+}
